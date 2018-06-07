@@ -26,30 +26,32 @@ class Welcome extends CI_Controller {
 	// }
 
 	public function curls() {
-	    $username = '';
-	    $password = '';
-	    //exit('slo');
-	    // Alternative JSON version
-	    // $url = 'http://twitter.com/statuses/update.json';
-	    // Set up and execute the curl process
-	    $curl_handle = curl_init();
-	    curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/SnappAPI/sendResetPass');
-	    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-	    curl_setopt($curl_handle, CURLOPT_POST, 1);
-	    curl_setopt($curl_handle, CURLOPT_POSTFIELDS, array(
-	    	'email' => 'krivokapic.bogdan10@gmail.com',
-	    	'password' => 'caocao'
-	    ));
+	    // $username = '';
+	    // $password = '';
+	    // //exit('slo');
+	    // // Alternative JSON version
+	    // // $url = 'http://twitter.com/statuses/update.json';
+	    // // Set up and execute the curl process
+	    // $curl_handle = curl_init();
+	    // curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/AppyAPI/sendIPTVaccessMail');
+	    // curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+	    // curl_setopt($curl_handle, CURLOPT_POST, 1);
+	    // curl_setopt($curl_handle, CURLOPT_POSTFIELDS, array(
+	    // 	'useraddress' => 'krivokapic.bogdan10@gmail.com',
+	    // 	'clientaddress' => 'caocao',
+	    // 	'expiredate' => '2018-06-06 15:00:00',
+	    // 	'appname' => 'Yo app'
+	    // ));
 	     
-	    // Optional, delete this line if your API is open
-	    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password);
+	    // // Optional, delete this line if your API is open
+	    // curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password);
 	     
-	    $buffer = curl_exec($curl_handle);
-	    curl_close($curl_handle);
+	    // $buffer = curl_exec($curl_handle);
+	    // curl_close($curl_handle);
 	     
-	    $result = json_decode($buffer);	
+	    // $result = json_decode($buffer);	
 
-	    print_r($result);	
+	    // print_r($result);	
 	}
 
 	// public function curledit() {

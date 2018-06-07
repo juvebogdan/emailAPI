@@ -388,5 +388,31 @@ class AppyAPI extends REST_Controller {
             'status' => 'Success',
             'message' => 'Sent mail to ' . $to
         ], 200); 		    	
-    }    
+    } 
+
+
+    public function sendIPTVaccessMail_post() {
+
+        $useraddress = $this->input->post('useraddress');
+        $clientaddress = $this->input->post('clientaddress');
+        $expiredate = $this->input->post('expiredate'); 
+        $appname = $this->input->post('appname');
+
+        include(APPPATH.'third_party/Mailer.php');
+
+        date_default_timezone_set('Europe/London');  
+        
+        $subject = "Premium Access Granted";
+        $to = $useraddress;
+        $from = $clientaddress; 
+        $mail1 = new Mailer($to,$from,$subject,APPPATH.'views/iptvaccess.html');
+        $mail1->setExpiryDate($expiredate);
+        $mail1->setAppname($appname);       
+        $mail1->send_mail_iptvaccess(); 
+
+        $this->response([
+            'status' => 'Success',
+            'message' => 'Sent mail to ' . $useraddress
+        ], 200);                 
+    }   
 }
