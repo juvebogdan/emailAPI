@@ -414,5 +414,29 @@ class AppyAPI extends REST_Controller {
             'status' => 'Success',
             'message' => 'Sent mail to ' . $useraddress
         ], 200);                 
-    }   
+    }
+
+    public function sendIPTVaccessReminderMail_post() {
+
+        $useraddress = $this->input->post('useraddress');
+        $clientaddress = $this->input->post('clientaddress');
+        $appname = $this->input->post('appname');
+
+        include(APPPATH.'third_party/Mailer.php');
+
+        date_default_timezone_set('Europe/London');  
+        
+        $subject = "Your premium access is expiring soon";
+        $to = $useraddress;
+        $from = $clientaddress; 
+        $mail1 = new Mailer($to,$from,$subject,APPPATH.'views/iptvaccess_reminder.html');
+        $mail1->setAppname($appname);       
+        $mail1->send_mail_iptvaccessreminder(); 
+
+        $this->response([
+            'status' => 'Success',
+            'message' => 'Sent mail to ' . $useraddress
+        ], 200);                 
+    }
+
 }
