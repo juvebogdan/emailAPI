@@ -33,13 +33,14 @@ class Welcome extends CI_Controller {
 	    // // $url = 'http://twitter.com/statuses/update.json';
 	    // // Set up and execute the curl process
 	    // $curl_handle = curl_init();
-	    // curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/AppyAPI/sendIPTVaccessReminderMail');
+	    // curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/AppyAPI/sendIPTVNewAccessMail');
 	    // curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
 	    // curl_setopt($curl_handle, CURLOPT_POST, 1);
 	    // curl_setopt($curl_handle, CURLOPT_POSTFIELDS, array(
 	    // 	'useraddress' => 'krivokapic.bogdan10@gmail.com',
 	    // 	'clientaddress' => 'caocao',
-	    // 	'appname' => 'Yo app'
+	    // 	'appname' => 'Yo f*ing app',
+	    // 	'expiredate' => '2018-06-10 10:00:00'
 	    // ));
 	     
 	    // // Optional, delete this line if your API is open

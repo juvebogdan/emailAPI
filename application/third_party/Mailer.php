@@ -255,6 +255,29 @@ class Mailer {
 		$message ->addPart($body, 'text/html');
 		$result = $mailer->send($message);
 		return $result;
+	}	
+
+	public function send_mail_iptvaccessnew()
+	{
+		include_once '/var/www/html/mailer/swiftmailer/lib/swift_required.php'; 
+		$this -> format_email_iptvaccessnew($this->appname, $this->expirydate);
+		$body = $this -> template;
+
+		$transport = Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs');
+
+		//$transport->setLocalDomain('[127.0.0.1]');
+		$message = Swift_Message::newInstance();
+		$message ->setSubject($this->subject);
+		$message ->setFrom("postmaster@appy.zone", $this->from);
+		$message ->setTo(array($this->to => 'Name'));
+		//$message ->setTo(array($this->to => 'Name'));
+		//$message ->setBcc('krivokapic.bogdan10@gmail.com');
+		//$message ->setBcc('sales@aerialview.tv');		
+		$mailer = Swift_Mailer::newInstance($transport);
+		//$message ->setBody($body_plain_txt);
+		$message ->addPart($body, 'text/html');
+		$result = $mailer->send($message);
+		return $result;
 	}						
 
 
@@ -306,7 +329,13 @@ class Mailer {
 	public function format_email_iptvaccessreminder($appname){
 	
 		$this -> template = preg_replace('/{APPNAME}/', $appname, $this -> template);
-	}					
+	}
+
+	public function format_email_iptvaccessnew($appname, $expirydate){
+	
+		$this -> template = preg_replace('/{APPNAME}/', $appname, $this -> template);
+		$this -> template = preg_replace('/{EXPIRYDATE}/', $expirydate, $this -> template);
+	}						
 
 	public function setPin($pin) {
 		$this->pin = $pin;
