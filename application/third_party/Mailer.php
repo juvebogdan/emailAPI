@@ -278,6 +278,28 @@ class Mailer {
 		$message ->addPart($body, 'text/html');
 		$result = $mailer->send($message);
 		return $result;
+	}
+
+	public function send_mail_creditstopup()
+	{
+		include_once '/var/www/html/mailer/swiftmailer/lib/swift_required.php'; 
+		$body = $this -> template;
+
+		$transport = Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs');
+
+		//$transport->setLocalDomain('[127.0.0.1]');
+		$message = Swift_Message::newInstance();
+		$message ->setSubject($this->subject);
+		$message ->setFrom("postmaster@appy.zone", $this->from);
+		$message ->setTo(array($this->to => 'Name'));
+		//$message ->setTo(array($this->to => 'Name'));
+		//$message ->setBcc('krivokapic.bogdan10@gmail.com');
+		//$message ->setBcc('sales@aerialview.tv');		
+		$mailer = Swift_Mailer::newInstance($transport);
+		//$message ->setBody($body_plain_txt);
+		$message ->addPart($body, 'text/html');
+		$result = $mailer->send($message);
+		return $result;
 	}						
 
 

@@ -98,10 +98,31 @@ class MainAPI extends REST_Controller {
             $this->mainmodel->statsinsert($client,$num,$tipplacanja,$user,$final);
             //
             //Salje mail ako je prije imao vise od 30 kredita  a posle korekcije manje
-            //if($odgovor[0]['iptvcredits']-$num<30 && $odgovor[0]>=30)
-            //{
-                //mail
-            //}
+            if($odgovor[0]['iptvcredits']-$num<30 && $odgovor[0]>=30)
+            {
+                $username = 'appy';
+                $password = 'fisstops';
+                 
+
+                $curl_handle = curl_init();
+                curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/AppyAPI/sendCreditsTopUpReminder');
+                curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl_handle, CURLOPT_POST, 1);
+                $data = array(
+                    'clientaddress' => $odgovor[0]['email'],
+                );
+                //curl_setopt($curl_handle, CURLOPT_SAFE_UPLOAD, false);
+                curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data);
+                 
+                curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password);
+                 
+                $buffer = curl_exec($curl_handle);
+                curl_close($curl_handle);
+                 
+                $result = json_decode($buffer); 
+
+                //print_r($result);
+            }
             //
             //mail na email clienta
                 $curl_handle = curl_init();

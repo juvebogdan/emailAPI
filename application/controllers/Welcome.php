@@ -114,12 +114,11 @@ class Welcome extends CI_Controller {
 	     
 
 	    // $curl_handle = curl_init();
-	    // curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/AppyAPI/sendLowSaldoNewVPN');
+	    // curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/AppyAPI/sendCreditsTopUpReminder');
 	    // curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
 	    // curl_setopt($curl_handle, CURLOPT_POST, 1);
 	    // $data = array(
-	    // 	'email' => 'Virtualstreamz@gmail.com',
-	    // 	'type' => 'new'
+	    // 	'clientaddress' => 'krivokapic.bogdan10@gmail.com',
 	    // );
 	    // //curl_setopt($curl_handle, CURLOPT_SAFE_UPLOAD, false);
 	    // curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data);
@@ -135,23 +134,23 @@ class Welcome extends CI_Controller {
 	}
 	public function tryapi()
 	{
-		$username = 'appy';
-	    $password = 'fisstops';
-	    $curl_handle = curl_init();
-	    curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/MainAPI/');
-	    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-	    curl_setopt($curl_handle, CURLOPT_POST, 1);
-	    $data = array(
-	    	'type'	=>	'month1',
-	    	'client' => 'AGE216',
-	    	'email' => 'filip.jovanovic@yahoo.com',
-	    	'paytype' => 'paypal'
-	    );
-	    curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data); 
-	    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password); 
-	    $buffer = curl_exec($curl_handle);
-	    curl_close($curl_handle);
-	    $result = json_decode($buffer);	
-	    print_r($result);
+		// $username = '';
+	 //    $password = '';
+	 //    $curl_handle = curl_init();
+	 //    curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/MainAPI/');
+	 //    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+	 //    curl_setopt($curl_handle, CURLOPT_POST, 1);
+	 //    $data = array(
+	 //    	'type'	=>	'month1',
+	 //    	'client' => 'AGE216',
+	 //    	'email' => 'filip.jovanovic@yahoo.com',
+	 //    	'paytype' => 'paypal'
+	 //    );
+	 //    curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data); 
+	 //    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password); 
+	 //    $buffer = curl_exec($curl_handle);
+	 //    curl_close($curl_handle);
+	 //    $result = json_decode($buffer);	
+	 //    print_r($result);
 	}	
 }

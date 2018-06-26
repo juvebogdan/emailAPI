@@ -462,6 +462,26 @@ class AppyAPI extends REST_Controller {
             'status' => 'Success',
             'message' => 'Sent mail to ' . $useraddress
         ], 200);                 
+    } 
+
+    public function sendCreditsTopUpReminder_post() {
+
+        $clientaddress = $this->input->post('clientaddress');
+
+        include(APPPATH.'third_party/Mailer.php');
+
+        date_default_timezone_set('Europe/London');  
+        
+        $subject = "Top up now!";
+        $to = $clientaddress;
+        $from = 'AVS Team'; 
+        $mail1 = new Mailer($to,$from,$subject,APPPATH.'views/creditstopupreminder.html');      
+        $mail1->send_mail_creditstopup(); 
+
+        $this->response([
+            'status' => 'Success',
+            'message' => 'Sent mail to ' . $clientaddress
+        ], 200);                 
     }    
 
 }
