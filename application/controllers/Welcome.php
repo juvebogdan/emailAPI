@@ -81,32 +81,32 @@ class Welcome extends CI_Controller {
 	//     print_r($result);	
 	// }
 
-	public function curlmail() {
-	    $username = '';
-	    $password = '';
+	// public function curlmail() {
+	//     $username = '';
+	//     $password = '';
 	     
 
-	    $curl_handle = curl_init();
-	    curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/NewVPNAPI/sendDevEmail');
-	    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-	    curl_setopt($curl_handle, CURLOPT_POST, 1);
-	    $data = array('data' => json_encode(array(
-	    	'email' => 'krivokapic.bogdan10@gmail.com',
-	    	'code1' => "http://165.227.38.2/vpnapi/login/login?u=prcprc",
-	    	'code2' => "http://165.227.38.2/vpnapi/login/login?u=prcprc2"
-	    )));
-	    //curl_setopt($curl_handle, CURLOPT_SAFE_UPLOAD, false);
-	    curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data);
+	//     $curl_handle = curl_init();
+	//     curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/NewVPNAPI/sendDevEmail');
+	//     curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+	//     curl_setopt($curl_handle, CURLOPT_POST, 1);
+	//     $data = array('data' => json_encode(array(
+	//     	'email' => 'krivokapic.bogdan10@gmail.com',
+	//     	'code1' => "http://165.227.38.2/vpnapi/login/login?u=prcprc",
+	//     	'code2' => "http://165.227.38.2/vpnapi/login/login?u=prcprc2"
+	//     )));
+	//     //curl_setopt($curl_handle, CURLOPT_SAFE_UPLOAD, false);
+	//     curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data);
 	     
-	    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password);
+	//     curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password);
 	     
-	    $buffer = curl_exec($curl_handle);
-	    curl_close($curl_handle);
+	//     $buffer = curl_exec($curl_handle);
+	//     curl_close($curl_handle);
 	     
-	    $result = json_decode($buffer);	
+	//     $result = json_decode($buffer);	
 
-	    print_r($result);	
-	}
+	//     print_r($result);	
+	// }
 
 	public function curl() {
 	    // $username = '';
@@ -132,5 +132,26 @@ class Welcome extends CI_Controller {
 	    // $result = json_decode($buffer);	
 
 	    // print_r($result);
+	}
+	public function tryapi()
+	{
+		$username = 'appy';
+	    $password = 'fisstops';
+	    $curl_handle = curl_init();
+	    curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/MainAPI/');
+	    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+	    curl_setopt($curl_handle, CURLOPT_POST, 1);
+	    $data = array(
+	    	'type'	=>	'month1',
+	    	'client' => 'AGE216',
+	    	'email' => 'filip.jovanovic@yahoo.com',
+	    	'paytype' => 'paypal'
+	    );
+	    curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data); 
+	    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password); 
+	    $buffer = curl_exec($curl_handle);
+	    curl_close($curl_handle);
+	    $result = json_decode($buffer);	
+	    print_r($result);
 	}	
 }
