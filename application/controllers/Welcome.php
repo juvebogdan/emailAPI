@@ -37,7 +37,7 @@ class Welcome extends CI_Controller {
 	    // curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
 	    // curl_setopt($curl_handle, CURLOPT_POST, 1);
 	    // curl_setopt($curl_handle, CURLOPT_POSTFIELDS, array(
-	    // 	'useraddress' => 'krivokapic.bogdan10@gmail.com',
+	    // 	'useraddress' => '',
 	    // 	'clientaddress' => 'caocao',
 	    // 	'appname' => 'Yo f*ing app',
 	    // 	'expiredate' => '2018-06-10 10:00:00'
@@ -91,9 +91,9 @@ class Welcome extends CI_Controller {
 	//     curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
 	//     curl_setopt($curl_handle, CURLOPT_POST, 1);
 	//     $data = array('data' => json_encode(array(
-	//     	'email' => 'krivokapic.bogdan10@gmail.com',
-	//     	'code1' => "http://165.227.38.2/vpnapi/login/login?u=prcprc",
-	//     	'code2' => "http://165.227.38.2/vpnapi/login/login?u=prcprc2"
+	//     	'email' => '',
+	//     	'code1' => "",
+	//     	'code2' => ""
 	//     )));
 	//     //curl_setopt($curl_handle, CURLOPT_SAFE_UPLOAD, false);
 	//     curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data);
@@ -118,7 +118,7 @@ class Welcome extends CI_Controller {
 	    // curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
 	    // curl_setopt($curl_handle, CURLOPT_POST, 1);
 	    // $data = array(
-	    // 	'clientaddress' => 'krivokapic.bogdan10@gmail.com',
+	    // 	'clientaddress' => '',
 	    // );
 	    // //curl_setopt($curl_handle, CURLOPT_SAFE_UPLOAD, false);
 	    // curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data);
@@ -134,23 +134,23 @@ class Welcome extends CI_Controller {
 	}
 	public function tryapi()
 	{
-		// $username = '';
-	 //    $password = '';
-	 //    $curl_handle = curl_init();
-	 //    curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/MainAPI/');
-	 //    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-	 //    curl_setopt($curl_handle, CURLOPT_POST, 1);
-	 //    $data = array(
-	 //    	'type'	=>	'month1',
-	 //    	'client' => 'AGE216',
-	 //    	'email' => 'filip.jovanovic@yahoo.com',
-	 //    	'paytype' => 'paypal'
-	 //    );
-	 //    curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data); 
-	 //    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password); 
-	 //    $buffer = curl_exec($curl_handle);
-	 //    curl_close($curl_handle);
-	 //    $result = json_decode($buffer);	
-	 //    print_r($result);
+		$username = '';
+	    $password = '';
+	    $curl_handle = curl_init();
+	    curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/MainAPI/');
+	    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+	    curl_setopt($curl_handle, CURLOPT_POST, 1);
+	    $data = array(
+	    	'type'	=>	'',
+	    	'client' => '',
+	    	'email' => '',
+	    	'paytype' => ''
+	    );
+	    curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data); 
+	    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password); 
+	    $buffer = curl_exec($curl_handle);
+	    curl_close($curl_handle);
+	    $result = json_decode($buffer);	
+	    print_r($result);
 	}	
 }

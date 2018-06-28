@@ -18,6 +18,7 @@ class MainAPI extends REST_Controller {
 
     public function index_post()
     {
+        $this->load->model('mainmodel');
         //setovanje i prikupljanje podataka
         $user = $rand = substr(md5(microtime()),rand(0,26),8);//$this->input->post('username');
         $pass = $rand = substr(md5(microtime()),rand(0,26),8);//$this->input->post('password');
@@ -25,47 +26,58 @@ class MainAPI extends REST_Controller {
         $client = $this->input->post('client');
         $email=$this->input->post('email');
         $tipplacanja=$this->input->post('paytype');
-        $this->load->model('mainmodel');
         $odgovor=$this->mainmodel->getinfo($client);
         date_default_timezone_set('Europe/Berlin');
         $time = strtotime(date('Y-m-d H:i:s'));
         //
+        //provjera ima li usera
+        $numuser=$this->mainmodel->checkclient($client);
+        if($numuser!=1)
+        {
+            $this->response(['status' => 'Unsuccess','message' => 'No user found'], 200);
+        }
         //provjera koji je tip i setovanje trial i broja kredita
         if($type=='trial' && (date('l')!='Saturday' || date('l')!='Sunday'))
         {
             $num=0;
             $trial=1;
             $final = date("Y-m-d H:i:s", strtotime("+1 days", $time));
+            $pay=0;
         }
-        else if($type=='week' && (date('l')=='Saturday' || date('l')=='Friday'))
+        else if($type=='week')
         {
             $num=1;
             $trial=0;
             $final = date("Y-m-d H:i:s", strtotime("+2 days", $time));
+            $pay=1.99;
         }
         else if($type=='month1')
         {
             $num=3;
             $trial=0;
             $final = date("Y-m-d H:i:s", strtotime("+1 month", $time));
+            $pay=9.99;
         }
         else if($type=='month3')
         {
             $num=9;
             $trial=0;
             $final = date("Y-m-d H:i:s", strtotime("+3 month", $time));
+            $pay=19.99;
         }
         else if($type=='month6')
         {
             $num=15;
             $trial=0;
             $final = date("Y-m-d H:i:s", strtotime("+6 month", $time));
+            $pay=49.99;
         }
         else if($type=='month12')
         {
             $num=30;
             $trial=0;
             $final = date("Y-m-d H:i:s", strtotime("+12 month", $time));
+            $pay=69.99;
         }
         else
         {
@@ -95,7 +107,7 @@ class MainAPI extends REST_Controller {
             $this->mainmodel->updateclient($client,$num);
             //
             //upisuje u stats tabelu u appy bazi
-            $this->mainmodel->statsinsert($client,$num,$tipplacanja,$user,$final);
+            $this->mainmodel->statsinsert($client,$num,$tipplacanja,$user,date("Y-m-d H:i:s"),$pay);
             //
             //Salje mail ako je prije imao vise od 30 kredita  a posle korekcije manje
             if($odgovor[0]['iptvcredits']-$num<30 && $odgovor[0]>=30)
@@ -144,7 +156,7 @@ class MainAPI extends REST_Controller {
             //
             //Update-uje u bazu korisnika appy-a za toga usera DeviceIdTabelu sa podacima user pass i exp date
             $con = mysqli_connect($odgovor[0]['ipaddress'],$odgovor[0]['dbusername'],$odgovor[0]['dbpassword'],$odgovor[0]['dbname']);
-            $query=sprintf('update DeviceIDTable set Username="%s",Password="%s",AccessDuration="%s" where Email="%s"',$user,$pass,date("Y-m-d H:i:s"),$email);
+            $query=sprintf('update DeviceIDTable set Username="%s",Password="%s",AccessDuration="%s" where Email="%s"',$user,$pass,$final,$email);
             mysqli_query($con,$query);
             mysqli_close($con);
             //
