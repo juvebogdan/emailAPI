@@ -29,6 +29,7 @@ class MainAPI extends REST_Controller {
         $odgovor=$this->mainmodel->getinfo($client);
         date_default_timezone_set('Europe/Berlin');
         $time = strtotime(date('Y-m-d H:i:s'));
+        $ind = 1;
         //
         //provjera ima li usera
         $numuser=$this->mainmodel->checkclient($client);
@@ -81,9 +82,11 @@ class MainAPI extends REST_Controller {
         }
         else
         {
+            $ind = 0;
             $this->response(['status' => 'Unsuccess','message' => 'Invalid request'], 200);
         }
-        //
+        if ($ind == 1) {
+                    //
         //Ukoliko ima kredita
         if($odgovor[0]['iptvcredits']-$num>=0)
          {
@@ -138,21 +141,21 @@ class MainAPI extends REST_Controller {
             //
             //mail na email clienta
                 $curl_handle = curl_init();
-			    curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/AppyAPI/sendIPTVNewAccessMail');
-			    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-			    curl_setopt($curl_handle, CURLOPT_POST, 1);
-			    curl_setopt($curl_handle, CURLOPT_POSTFIELDS, array(
-			        'useraddress' => $email,
-			        'clientaddress' => $odgovor[0]['email'],
-			        'appname' => $odgovor[0]['Appname'],
-			        'expiredate' => $final
-			    ));
+                curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/AppyAPI/sendIPTVNewAccessMail');
+                curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl_handle, CURLOPT_POST, 1);
+                curl_setopt($curl_handle, CURLOPT_POSTFIELDS, array(
+                    'useraddress' => $email,
+                    'clientaddress' => $odgovor[0]['email'],
+                    'appname' => $odgovor[0]['Appname'],
+                    'expiredate' => $final
+                ));
                 $username = 'appy';
                 $password = 'fisstops';
-			    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password);
-			    $buffer = curl_exec($curl_handle);
-			    curl_close($curl_handle);
-			    $result = json_decode($buffer);  
+                curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password);
+                $buffer = curl_exec($curl_handle);
+                curl_close($curl_handle);
+                $result = json_decode($buffer);  
             //
             //Update-uje u bazu korisnika appy-a za toga usera DeviceIdTabelu sa podacima user pass i exp date
             $con = mysqli_connect($odgovor[0]['ipaddress'],$odgovor[0]['dbusername'],$odgovor[0]['dbpassword'],$odgovor[0]['dbname']);
@@ -161,12 +164,13 @@ class MainAPI extends REST_Controller {
             mysqli_close($con);
             //
             //Odgovor da je sve ok
-            $this->response(['status' => 'Success','message'=> "Done"], 200);
+            $this->response(['status' => 'Success','message'=> "User created"], 200);
          }
         else
         {
             //Odgovor da nema kredita
             $this->response(['status' => 'Unsuccess','message' => 'Not enough credits'], 200);
+        }
         }
     }
 
