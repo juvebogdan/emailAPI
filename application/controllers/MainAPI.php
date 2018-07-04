@@ -159,7 +159,12 @@ class MainAPI extends REST_Controller {
             //
             //Update-uje u bazu korisnika appy-a za toga usera DeviceIdTabelu sa podacima user pass i exp date
             $con = mysqli_connect($odgovor[0]['ipaddress'],$odgovor[0]['dbusername'],$odgovor[0]['dbpassword'],$odgovor[0]['dbname']);
+            if ($trial==1) {
+            $query=sprintf('update DeviceIDTable set Username="%s",Password="%s",AccessDuration="%s",trial="1" where Email="%s"',$user,$pass,$final,$email);                
+            }
+            else {
             $query=sprintf('update DeviceIDTable set Username="%s",Password="%s",AccessDuration="%s" where Email="%s"',$user,$pass,$final,$email);
+            }
             mysqli_query($con,$query);
             mysqli_close($con);
             //

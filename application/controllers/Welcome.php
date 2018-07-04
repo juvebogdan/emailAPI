@@ -134,23 +134,23 @@ class Welcome extends CI_Controller {
 	}
 	public function tryapi()
 	{
-		$username = '';
-	    $password = '';
-	    $curl_handle = curl_init();
-	    curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/MainAPI/');
-	    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-	    curl_setopt($curl_handle, CURLOPT_POST, 1);
-	    $data = array(
-	    	'type'	=>	'',
-	    	'client' => '',
-	    	'email' => '',
-	    	'paytype' => ''
-	    );
-	    curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data); 
-	    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password); 
-	    $buffer = curl_exec($curl_handle);
-	    curl_close($curl_handle);
-	    $result = json_decode($buffer);	
-	    print_r($result);
+		// $username = 'appy';
+	 //    $password = 'fisstops';
+	 //    $curl_handle = curl_init();
+	 //    curl_setopt($curl_handle, CURLOPT_URL, 'http://appy.zone/rest/MainAPI/');
+	 //    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+	 //    curl_setopt($curl_handle, CURLOPT_POST, 1);
+	 //    $data = array(
+	 //    	'type'	=>	'trial',
+	 //    	'client' => 'FissNew',
+	 //    	'email' => 'avstreamtv@gmail.com',
+	 //    	'paytype' => ''
+	 //    );
+	 //    curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data); 
+	 //    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password); 
+	 //    $buffer = curl_exec($curl_handle);
+	 //    curl_close($curl_handle);
+	 //    $result = json_decode($buffer);	
+	 //    print_r($result);
 	}	
 }
