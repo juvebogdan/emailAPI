@@ -64,7 +64,7 @@ class MainAPI extends REST_Controller {
             $num=9;
             $trial=0;
             $final = date("Y-m-d H:i:s", strtotime("+3 month", $time));
-            $pay=19.99;
+            $pay=24.99;
         }
         else if($type=='month6')
         {
